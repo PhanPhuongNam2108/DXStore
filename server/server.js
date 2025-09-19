@@ -1,18 +1,18 @@
-const express = require('express');
-require('dotenv').config();
+const express = require('express')
+require('dotenv').config()
+const dbConnect = require('./config/dbconnect')
+const initRoutes = require('./routes')
+
 
 const app = express();
-const PORT = process.env.PORT || 8888;
+const port = process.env.PORT || 8888;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+// Connect to the database
+dbConnect()
+initRoutes(app)
 
-// Example route
-
-app.use('/', (req, res) => {
-  res.send('Server is running');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
 });
